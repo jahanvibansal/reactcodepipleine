@@ -28,4 +28,4 @@ COPY --from=builder /react-app/build .
 CMD ["s3", "sync", "./", "s3://terraforms3bucket1234"] 
 
 #docker build --tag react-app --file Dockerfile . 
-# docker run --env AWS_ACCESS_KEY_ID=AKIAYMEVVLPBEITXRY5M  --env AWS_SECRET_ACCESS_KEY=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  --env AWS_DEFAULT_REGION=us-east-1 react-app
+# docker run   --env AWS_DEFAULT_REGION=us-east-1 react-app
