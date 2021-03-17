@@ -1,14 +1,19 @@
 version: 0.2
+
+env: 
+   variables:
+      S3_BUCKET: "terraforms3bucket1234"
+      APP_NAME: "react-app"
+      BUILD_ENV: "prod"
 phases:
-  install:
-    runtime-versions:
-      docker: 19
+
   pre_build:
     commands:
       - aws --version
+      - npm install --silent
+      - npm install react-scripts@3.4.1 -g --silent
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...
-      - docker build -t react-app .
-      - docker run --env AWS_DEFAULT_REGION=us-east-1 react-app
+      - npm run build
+      - aws s3 sync "./" s3://$S3_BUCKET
