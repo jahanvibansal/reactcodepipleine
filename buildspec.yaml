@@ -8,10 +8,11 @@ phases:
       - npm install --silent
       - npm install react-scripts@3.4.1 -g --silent
       - echo $CODEBUILD_SOURCE_VERSION
+      - echo $CODEBUILD_WEBHOOK_BASE_REF
   build:
     commands:
       - echo Build started on `date`
       - echo $CODEBUILD_GIT_BRANCH
       - npm run build
-      - aws s3 sync "./build" s3://$S3_BUCKET/$CODEBUILD_GIT_BRANCH
+      - aws s3 sync "./build" s3://$S3_BUCKET/$CODEBUILD_WEBHOOK_BASE_REF
 
