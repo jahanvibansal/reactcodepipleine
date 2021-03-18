@@ -7,10 +7,11 @@ phases:
       - aws --version
       - npm install --silent
       - npm install react-scripts@3.4.1 -g --silent
+      - curl -fsSL https://raw.githubusercontent.com/thii/aws-codebuild-extras/<A_COMMIT_HASH>/install >> extras.sh && . ./extras.sh
   build:
     commands:
       - echo Build started on `date`
-      - echo $Branch
+      - echo $CODEBUILD_GIT_BRANCH
       - npm run build
-      - aws s3 sync "./build" s3://$S3_BUCKET/$Branch
+      - aws s3 sync "./build" s3://$S3_BUCKET/$CODEBUILD_GIT_BRANCH
 
