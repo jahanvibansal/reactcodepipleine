@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+
+  pre_build:
+    commands:
+      - aws --version
+      - npm install --silent
+      - npm install react-scripts@3.4.1 -g --silent
+      - echo $CODEBUILD_WEBHOOK_HEAD_REF
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm run build 
+      - aws s3 sync "./build" s3://terraforms3bucket1234/master
+        
+
