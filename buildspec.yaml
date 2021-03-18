@@ -12,8 +12,9 @@ phases:
       - echo Build started on `date`
       - npm run build 
       - |-
-          if [ "$CODEBUILD_WEBHOOK_HEAD_REF" == "refs/heads/dev" ]; then
+          if [ "$CODEBUILD_WEBHOOK_HEAD_REF" == "refs/heads/master" ]; then
+            aws s3 sync "./build" s3://terraforms3bucket1234/master
+          else if [ "$CODEBUILD_WEBHOOK_HEAD_REF" == "refs/heads/dev" ]; then
             aws s3 sync "./build" s3://terraforms3bucket1234/dev
           fi
-      - 
 
