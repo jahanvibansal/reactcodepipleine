@@ -1,5 +1,7 @@
 version: 0.2
-
+env: 
+  variables:
+    key=value
 phases:
 
   pre_build:
@@ -11,6 +13,10 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - npm run build
-      - aws s3 sync "./build" s3://$S3_BUCKET/$CODEBUILD_WEBHOOK_HEAD_REF
+      - npm run build 
+      -
+          if [ "$CODEBUILD_WEBHOOK_HEAD_REF" == "refs/heads/dev" ]; then
+            aws s3 sync "./build" s3://terraforms3bucket1234/dev
+          fi
+      - 
 
