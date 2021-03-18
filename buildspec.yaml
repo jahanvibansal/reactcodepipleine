@@ -7,7 +7,7 @@ phases:
       - aws --version
       - npm install --silent
       - npm install react-scripts@3.4.1 -g --silent
-      - curl -fsSL https://raw.githubusercontent.com/thii/aws-codebuild-extras/<A_COMMIT_HASH>/install >> extras.sh && . ./extras.sh
+      -  curl -fsSL https://github.com/payalb/reactcodepipleine/master/install >> extras.sh
   build:
     commands:
       - echo Build started on `date`
