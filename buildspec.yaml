@@ -14,7 +14,9 @@ phases:
       - |-
           if [ "$CODEBUILD_WEBHOOK_HEAD_REF" == "refs/heads/master" ]; then
             aws s3 sync "./build" s3://terraforms3bucket1234/master
-          else if [ "$CODEBUILD_WEBHOOK_HEAD_REF" == "refs/heads/dev" ]; then
+          fi
+      - |-    
+          if [ "$CODEBUILD_WEBHOOK_HEAD_REF" == "refs/heads/dev" ]; then
             aws s3 sync "./build" s3://terraforms3bucket1234/dev
           fi
 
