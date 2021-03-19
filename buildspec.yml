@@ -1,7 +1,7 @@
 version: 0.2
 env:
   parameter-store:
-    S3_BUCKET: $S3_BUCKET
+    S3_BUCKET_VAL: S3_BUCKET
 phases:
   pre_build:
     commands:
@@ -13,6 +13,6 @@ phases:
     commands:
       - echo Build started on `date`
       - npm run build 
-      - aws s3 sync "./build" s3://$S3_BUCKET/master
+      - aws s3 sync "./build" s3://$S3_BUCKET_VAL/master
         
 
