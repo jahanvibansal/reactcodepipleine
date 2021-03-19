@@ -1,16 +1,18 @@
 version: 0.2
+env:
+  parameter-store:
+    S3_BUCKET: $S3_BUCKET
 phases:
-
   pre_build:
     commands:
       - aws --version
       - npm install --silent
       - npm install react-scripts@3.4.1 -g --silent
-      - echo $CODEBUILD_WEBHOOK_HEAD_REF
+      - echo $S3_BUCKET
   build:
     commands:
       - echo Build started on `date`
       - npm run build 
-      - aws s3 sync "./build" s3://terraforms3bucket1234/master
+      - aws s3 sync "./build" s3://$S3_BUCKET/master
         
 
